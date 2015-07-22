@@ -1,0 +1,47 @@
+CS 111 Lab 1a,b
+
+Contributors:
+Kwai Hung Shea
+304497354
+
+Fnu Pramono
+604498984
+
+
+Steps in our 1a implementation:
+
+1.We Store the char input stream into a dynamically allocated c string.
+
+2. Tokenize the c string into a linked list of tokens, (a struct that we defined) throwing an error if any invalid characters or sequences are found. 
+
+3. Check for and throw an error in the case of invalid syntax in the tokens linked list. Also handle newlines, which can be equivalent to sequences in some cases, and ignored in others.
+
+4. Turn the tokens linked list into a command stream (made of multiple linked root nodes of command struct trees).
+   We used two stacks (token stack and command stack) to properly build the command trees, reversing the order of the resulting command tree root node linked list.
+
+5. Read command streams by returning the first command struct tree root node and advancing a cursor.
+
+In part b
+
+The execute command works trivially for all commands once execute command
+for a SIMPLE_COMMAND is estabilished. 
+
+In the case of  a SIMPLE_COMMAND, the execution
+calls the "exec_simple", it will  perform a fork() system call.
+
+
+ For the serial case when time_travel == 0, the parent waits on the child pid to finish,
+storing the exit status of the child it its appropriate location.
+
+The child will calls the exec() system call to change 
+the program of execution. And the 
+ command that is called. This approach works well for
+the parallelization case.
+
+Limitations:
+There may be undifined behaviours with cases where there is new line
+ in the subshells.
+
+In  some very specail cases that are not known to us, there are
+syntax errors  at lines > than the actual line of the error.
+Most common are in multi-line subshell commands
